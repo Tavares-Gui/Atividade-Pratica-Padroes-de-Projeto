@@ -23,7 +23,6 @@ public class CajadoArcano extends ArmaAbstrata {
             sb.append("O alvo esquivou-se.");
             return sb.toString();
         }
-        // queimadura: 10 por 2 turnos
         alvo.adicionarEfeito(new EfeitoStatus(TipoEfeito.QUEIMADURA, 2, 10));
         sb.append("Aplicou QUEIMADURA (10 por 2 turnos).");
         return sb.toString();

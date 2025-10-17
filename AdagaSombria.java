@@ -21,7 +21,7 @@ public class AdagaSombria extends ArmaAbstrata {
         int dano;
         StringBuilder sb = new StringBuilder();
         if (desprevenido) {
-            dano = calcularDanoComCritico(atacante, danoBase * 3); // triplica o dano base
+            dano = calcularDanoComCritico(atacante, danoBase * 3);
             sb.append("Ataque Furtivo! ");
         } else {
             dano = calcularDanoComCritico(atacante, danoBase);

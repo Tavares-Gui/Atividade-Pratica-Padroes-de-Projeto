@@ -54,7 +54,6 @@ public abstract class Personagem {
         return false;
     }
 
-    // Processa efeitos no início do turno; retorna log do que aconteceu
     public String processarEfeitosInicioTurno() {
         StringBuilder sb = new StringBuilder();
         Iterator<EfeitoStatus> it = efeitos.iterator();
@@ -78,21 +77,16 @@ public abstract class Personagem {
         return sb.toString();
     }
 
-    // Hook para passivas, pode ser sobrescrito
     public double aplicarReducaoDano(double dano) {
-        return dano; // por padrão sem redução
+        return dano; 
     }
 
-    // Chance de esquiva (ex.: arqueiro)
     public boolean tentaEsquiva() { return false; }
 
-    // Hook para fim de turno (ex.: regen do Mago)
     public void fimDoTurno() {}
 
-    // Checa se tem arma equipada
     public boolean temArma() { return armaEquipada != null; }
 
-    // Ação padrão: usa arma equipada
     public String agir(Batalha batalha, Personagem alvo) {
         if (!estaVivo()) return nome + " está morto e não pode agir.";
         if (temEfeito(TipoEfeito.ATORDOADO)) {
@@ -102,7 +96,6 @@ public abstract class Personagem {
         return armaEquipada.atacar(this, alvo, batalha);
     }
 
-    // resumo para interface
     public String resumo() {
         return String.format("%s - HP: %d/%d | Mana: %d/%d | Força: %d Destreza: %d Inteligência: %d",
                 nome, vidaAtual, vidaMax, manaAtual, manaMax, forca, destreza, inteligencia);

@@ -27,8 +27,6 @@ public class EspadaLonga extends ArmaAbstrata {
             sb.append("O alvo esquivou-se.");
             return sb.toString();
         }
-
-        // 30% chance de sangramento (5 por 3 turnos)
         if (rnd.nextDouble() < 0.30) {
             alvo.adicionarEfeito(new EfeitoStatus(TipoEfeito.SANGRAMENTO, 3, 5));
             sb.append("Causou SANGRAMENTO (5 por 3 turnos).");

@@ -14,7 +14,6 @@ public class PlayerController {
         return personagensControlados.contains(p);
     }
 
-    // Função chamada para o personagem controlado: pede escolha de ação no console
     public void acaoDoJogador(Batalha batalha, Personagem p) {
         if (!p.estaVivo()) return;
         System.out.println("\nÉ a vez de: " + p.resumo());
@@ -30,7 +29,6 @@ public class PlayerController {
             String opt = sc.nextLine().trim();
             switch (opt) {
                 case "1":
-                    // escolher alvo
                     List<Personagem> inimigos = batalha.getOponentesDo(p);
                     if (inimigos.isEmpty()) { System.out.println("Não há inimigos vivos."); fimAcao = true; break; }
                     System.out.println("Escolha o alvo:");
@@ -44,7 +42,6 @@ public class PlayerController {
                     fimAcao = true;
                     break;
                 case "2":
-                    // lista de armas possíveis (podemos criar um menu com armas já existentes)
                     System.out.println("Armas disponíveis para equipar:");
                     Arma[] todas = new Arma[] {
                         new EspadaLonga(), new MachadoGuerra(), new ArcoElfico(), new CajadoArcano(), new AdagaSombria(), new AlabardaCristalina()

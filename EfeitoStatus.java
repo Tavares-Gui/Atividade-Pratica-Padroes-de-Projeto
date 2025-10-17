@@ -1,7 +1,7 @@
 public class EfeitoStatus {
     private TipoEfeito tipo;
-    private int duracao; // em turnos
-    private int potencia; // dano por turno ou intensidade
+    private int duracao;
+    private int potencia;
 
     public EfeitoStatus(TipoEfeito tipo, int duracao, int potencia) {
         this.tipo = tipo;

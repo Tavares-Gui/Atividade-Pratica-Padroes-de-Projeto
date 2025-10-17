@@ -6,7 +6,6 @@ public class Mago extends Personagem {
 
     @Override
     public void fimDoTurno() {
-        // Regeneração de mana: +10 por turno
         restaurarMana(10);
     }
 }

@@ -9,7 +9,6 @@ public class Arqueiro extends Personagem {
 
     @Override
     public boolean tentaEsquiva() {
-        // Esquiva: 25% de chance de evitar um ataque
         return rnd.nextDouble() < 0.25;
     }
 }

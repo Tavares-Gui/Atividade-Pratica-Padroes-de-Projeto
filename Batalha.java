@@ -28,20 +28,17 @@ public class Batalha {
     public boolean venceuTimeB() { return vivos(timeB).size() > 0 && vivos(timeA).isEmpty(); }
     public boolean terminou() { return venceuTimeA() || venceuTimeB(); }
 
-    // heurística para desprevenido: 50% de chance se não estiver ATORDOADO
     public boolean estaDesprevenido(Personagem alvo) {
         if (alvo.temEfeito(TipoEfeito.ATORDOADO)) return true;
         return rnd.nextDouble() < 0.5;
     }
 
-    // Aplica dano considerando esquiva e reduções; retorna true se dano foi aplicado (não esquivou)
     public boolean aplicarDano(Personagem atacante, Personagem alvo, int dano) {
         if (alvo.tentaEsquiva()) return false;
-        // soma modificadores de defesa reduzida
         int aumentoPercent = 0;
         for (EfeitoStatus e : alvo.efeitos) {
             if (e.getTipo() == TipoEfeito.DEFESA_REDUZIDA && !e.expirado()) {
-                aumentoPercent += e.getPotencia(); // ex.: 20 significa +20% de dano recebido
+                aumentoPercent += e.getPotencia();
             }
         }
         double danoAjustado = alvo.aplicarReducaoDano(dano);
@@ -51,11 +48,8 @@ public class Batalha {
         return true;
     }
 
-    // executa a batalha de forma interativa: o controle do Player deve chamar os métodos de escolha.
-    // Aqui centralizamos um "passo" que processa todos os personagens na ordem: timeA então timeB.
     public void executarTurnoInterativo(PlayerController playerController) {
         System.out.println("\n--- Turno " + turno + " ---");
-        // Processar time A
         for (Personagem p : new ArrayList<>(vivos(timeA))) {
             if (!p.estaVivo()) continue;
             String logEfeitos = p.processarEfeitosInicioTurno();
@@ -63,11 +57,9 @@ public class Batalha {
             if (!p.estaVivo()) { System.out.println(p.getNome() + " morreu por efeitos."); continue; }
             if (p.temEfeito(TipoEfeito.ATORDOADO)) { System.out.println(p.getNome() + " está atordoado e perde o turno."); continue; }
 
-            // se personagem for controlado pelo jogador, pede ação ao PlayerController
             if (playerController.controla(p)) {
                 playerController.acaoDoJogador(this, p);
             } else {
-                // IA simplificada para aliados não-jogadores: ataca o primeiro inimigo vivo
                 List<Personagem> inimigos = getOponentesDo(p);
                 if (!inimigos.isEmpty()) {
                     Personagem alvo = inimigos.get(rnd.nextInt(inimigos.size()));
@@ -78,7 +70,6 @@ public class Batalha {
             if (terminou()) return;
         }
 
-        // Processar time B (inimigos com IA)
         for (Personagem p : new ArrayList<>(vivos(timeB))) {
             if (!p.estaVivo()) continue;
             String logEfeitos = p.processarEfeitosInicioTurno();
@@ -86,7 +77,6 @@ public class Batalha {
             if (!p.estaVivo()) { System.out.println(p.getNome() + " morreu por efeitos."); continue; }
             if (p.temEfeito(TipoEfeito.ATORDOADO)) { System.out.println(p.getNome() + " está atordoado e perde o turno."); continue; }
 
-            // IA inimiga: tenta usar arma se tiver, senão troca para uma arma válida (não implementa inventário)
             List<Personagem> inimigos = getOponentesDo(p);
             if (!inimigos.isEmpty()) {
                 Personagem alvo = inimigos.get(rnd.nextInt(inimigos.size()));

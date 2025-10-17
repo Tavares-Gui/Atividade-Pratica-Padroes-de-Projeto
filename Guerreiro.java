@@ -5,7 +5,6 @@ public class Guerreiro extends Personagem {
 
     @Override
     public double aplicarReducaoDano(double dano) {
-        // Pele Dura: reduz dano recebido em 20%
         return dano * 0.8;
     }
 }

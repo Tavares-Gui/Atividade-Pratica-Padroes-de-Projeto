@@ -5,7 +5,6 @@ public class Paladino extends Personagem {
 
     @Override
     public double aplicarReducaoDano(double dano) {
-        // redução simbólica de 10%
         return dano * 0.9;
     }
 

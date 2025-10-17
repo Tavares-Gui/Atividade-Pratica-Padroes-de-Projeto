@@ -20,7 +20,6 @@ public abstract class ArmaAbstrata implements Arma {
         return usuario.getMana() >= custoMana;
     }
 
-    // cálculo de crítico: 10% base + 0.5% por ponto de destreza
     protected double chanceCritico(Personagem atacante) {
         return 0.10 + atacante.getDestreza() * 0.005;
     }
@@ -28,7 +27,6 @@ public abstract class ArmaAbstrata implements Arma {
     protected int calcularDanoComCritico(Personagem atacante, int base) {
         double chance = chanceCritico(atacante);
         if (rnd.nextDouble() < chance) {
-            // multiplicador crítico entre 1.5 e 2.0
             double mult = 1.5 + rnd.nextDouble() * 0.5;
             return (int)Math.round(base * mult);
         }

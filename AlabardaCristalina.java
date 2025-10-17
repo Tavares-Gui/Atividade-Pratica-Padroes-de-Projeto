@@ -22,7 +22,6 @@ public class AlabardaCristalina extends ArmaAbstrata {
             sb.append("O alvo esquivou-se.");
             return sb.toString();
         }
-        // Aplica efeito de redução de defesa por 2 turnos (potência: 20 significa que o alvo receberá +20% de dano)
         alvo.adicionarEfeito(new EfeitoStatus(TipoEfeito.DEFESA_REDUZIDA, 2, 20));
         sb.append("Ressonância aplicada: defesa reduzida (-20%) por 2 turnos.");
         return sb.toString();
